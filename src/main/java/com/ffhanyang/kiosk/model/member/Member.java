@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -101,5 +102,13 @@ public class Member {
     public String newApiToken(Jwt jwt, String[] roles) {
         Jwt.Claims claims = Jwt.Claims.of(id, email, roles);
         return jwt.newToken(claims);
+    }
+
+    public void login(PasswordEncoder passwordEncoder, String credentials) {
+        if (!passwordEncoder.matches(credentials, password)) {
+            throw new IllegalArgumentException("Invalid credentials.");
+        }
+        loginCount++;
+        lastLoginAt = LocalDateTime.now();
     }
 }
