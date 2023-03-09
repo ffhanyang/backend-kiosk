@@ -18,39 +18,39 @@ import static java.util.regex.Pattern.matches;
 public class Email {
 
     @Column
-    private String address;
+    private String member_email;
 
-    public Email(String address) {
-        checkArgument(isNotEmpty(address), "address must be provided.");
+    public Email(String member_email) {
+        checkArgument(isNotEmpty(member_email), "email must be provided.");
         checkArgument(
-            address.length() >= 4 && address.length() <= 40,
-            "address length must be between 4 and 50 characters."
+            member_email.length() >= 4 && member_email.length() <= 40,
+            "email length must be between 4 and 50 characters."
         );
-        checkArgument(checkAddress(address), "Invalid email address: " + address);
+        checkArgument(checkAddress(member_email), "Invalid email address: " + member_email);
 
-        this.address = address;
+        this.member_email = member_email;
     }
 
-    private static boolean checkAddress(String address) {
-        return matches("[\\w~\\-.+]+@[\\w~\\-]+(\\.[\\w~\\-]+)+", address);
+    private static boolean checkAddress(String member_email) {
+        return matches("[\\w~\\-.+]+@[\\w~\\-]+(\\.[\\w~\\-]+)+", member_email);
     }
 
     public String getName() {
-        String[] tokens = address.split("@");
+        String[] tokens = member_email.split("@");
         if (tokens.length == 2)
             return tokens[0];
         return null;
     }
 
     public String getDomain() {
-        String[] tokens = address.split("@");
+        String[] tokens = member_email.split("@");
         if (tokens.length == 2)
             return tokens[1];
         return null;
     }
 
     public String getAddress() {
-        return address;
+        return member_email;
     }
 
     @Override
@@ -58,18 +58,18 @@ public class Email {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Email email = (Email) o;
-        return Objects.equals(address, email.address);
+        return Objects.equals(member_email, email.member_email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(address);
+        return Objects.hash(member_email);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-            .append("address", address)
+            .append("member_email", member_email)
             .toString();
     }
 

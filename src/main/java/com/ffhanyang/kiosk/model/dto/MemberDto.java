@@ -12,22 +12,22 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 
 public class MemberDto {
 
-    @Schema(name = "PK", required = true)
+    @Schema(description = "PK", required = true)
     private Long id;
 
-    @Schema(name = "사용자명")
+    @Schema(description = "사용자명")
     private String name;
 
-    @Schema(name = "이메일", required = true)
+    @Schema(description = "이메일", required = true)
     private Email email;
 
-    @Schema(name = "로그인 횟수", required = true)
+    @Schema(description = "로그인 횟수", required = true)
     private int loginCount;
 
-    @Schema(name = "최종로그인일시")
+    @Schema(description = "최종로그인일시")
     private LocalDateTime lastLoginAt;
 
-    @Schema(name = "생성일시", required = true)
+    @Schema(description = "생성일시", required = true)
     private LocalDateTime createdAt;
 
     public MemberDto(Member source) {

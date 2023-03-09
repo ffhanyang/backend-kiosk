@@ -25,7 +25,7 @@ public class MemberService {
     public Member login(Email email, String credentials) {
         checkArgument(credentials != null, "credentials must be provided.");
 
-        Member member = memberRepository.findByEmail(email.getAddress())
+        Member member = memberRepository.findByEmail(email)
             .orElseThrow(() -> new NotFoundException(Member.class, email));
         member.login(passwordEncoder, credentials);
         return member;

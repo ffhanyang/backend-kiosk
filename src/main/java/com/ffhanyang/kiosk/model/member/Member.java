@@ -17,6 +17,9 @@ import java.util.Optional;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
+    /**
+     * TODO: Member ID 나중에 UUID로 바꿔야 함(현재는 Long)
+     */
     @Id
     @GeneratedValue
     @Column(name = "member_id")
