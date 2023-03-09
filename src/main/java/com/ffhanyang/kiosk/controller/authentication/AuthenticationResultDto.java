@@ -1,5 +1,6 @@
-package com.ffhanyang.kiosk.model.dto;
+package com.ffhanyang.kiosk.controller.authentication;
 
+import com.ffhanyang.kiosk.controller.member.MemberDto;
 import com.ffhanyang.kiosk.security.AuthenticationResult;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

@@ -1,8 +1,7 @@
-package com.ffhanyang.kiosk.controller;
+package com.ffhanyang.kiosk.controller.authentication;
 
 import com.ffhanyang.kiosk.error.UnauthorizedException;
-import com.ffhanyang.kiosk.model.dto.ApiResult;
-import com.ffhanyang.kiosk.model.dto.AuthenticationResultDto;
+import com.ffhanyang.kiosk.controller.commons.ApiResult;
 import com.ffhanyang.kiosk.security.AuthenticationResult;
 import com.ffhanyang.kiosk.security.AuthenticationRequest;
 import com.ffhanyang.kiosk.security.JwtAuthenticationToken;

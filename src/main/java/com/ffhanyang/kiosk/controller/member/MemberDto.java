@@ -1,4 +1,4 @@
-package com.ffhanyang.kiosk.model.dto;
+package com.ffhanyang.kiosk.controller.member;
 
 import com.ffhanyang.kiosk.model.member.Email;
 import com.ffhanyang.kiosk.model.member.Member;

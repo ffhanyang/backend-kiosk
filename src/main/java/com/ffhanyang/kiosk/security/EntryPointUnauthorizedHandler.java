@@ -1,7 +1,7 @@
 package com.ffhanyang.kiosk.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ffhanyang.kiosk.model.dto.ApiResult;
+import com.ffhanyang.kiosk.controller.commons.ApiResult;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-import static com.ffhanyang.kiosk.model.dto.ApiResult.ERROR;
+import static com.ffhanyang.kiosk.controller.commons.ApiResult.ERROR;
 
 @Component
 public class EntryPointUnauthorizedHandler implements AuthenticationEntryPoint {

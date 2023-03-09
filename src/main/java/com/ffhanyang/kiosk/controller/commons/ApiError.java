@@ -1,4 +1,4 @@
-package com.ffhanyang.kiosk.model.dto;
+package com.ffhanyang.kiosk.controller.commons;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.lang3.builder.ToStringBuilder;
