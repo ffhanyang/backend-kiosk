@@ -6,7 +6,7 @@ CREATE TABLE `member` (
 	`member_email`	VARCHAR(40)	NOT NULL,
 	`member_age`	INT	NOT NULL,
 	`member_gender`	VARCHAR(10)	NOT NULL,
-	`member_password`	VARCHAR(30)	NOT NULL,
+	`member_password`	VARCHAR(255)	NOT NULL,
 	`member_phone_number`	VARCHAR(15)	NULL,
 	`member_role`	VARCHAR(10)	NOT NULL,
 	`member_login_count`	INT	NOT NULL,

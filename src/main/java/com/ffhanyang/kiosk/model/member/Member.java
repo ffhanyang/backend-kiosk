@@ -3,10 +3,7 @@ package com.ffhanyang.kiosk.model.member;
 import com.ffhanyang.kiosk.model.Phone;
 import com.ffhanyang.kiosk.security.Jwt;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
@@ -14,6 +11,7 @@ import java.util.Optional;
 
 @Entity
 @Getter
+@EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
@@ -35,7 +33,7 @@ public class Member {
     @Column(name = "member_age", nullable = false)
     private int age;
 
-    @Column(name = "member_password", nullable = false, length = 30)
+    @Column(name = "member_password", nullable = false)
     private String password;
 
     @Column(name = "member_gender", nullable = false, length = 10)
@@ -80,6 +78,10 @@ public class Member {
 
     public Optional<LocalDateTime> getLastLoginAt() {
         return Optional.ofNullable(lastLoginAt);
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     @Builder
