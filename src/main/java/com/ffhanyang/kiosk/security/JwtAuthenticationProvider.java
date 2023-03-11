@@ -48,7 +48,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
                     createAuthorityList(member.getRole().value())
                 );
             String apiToken = member.newApiToken(jwt, new String[]{ROLE.USER.value()});
-            authenticated.setDetails(member);
+            authenticated.setDetails(new AuthenticationResult(apiToken, member));
             return authenticated;
         } catch (NotFoundException e) {
             throw new UsernameNotFoundException(e.getMessage(), e);
