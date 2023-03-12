@@ -10,7 +10,7 @@ import java.lang.annotation.RetentionPolicy;
 public @interface WithMockJwtAuthentication {
     long id() default 1L;
 
-    String email() default "tester0";
+    String email() default "tester0@gmail.com";
 
     String role() default "ROLE_USER";
 }
