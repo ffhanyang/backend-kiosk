@@ -5,6 +5,7 @@ import com.ffhanyang.kiosk.security.*;
 import com.ffhanyang.kiosk.service.member.MemberService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,6 +27,13 @@ public class SecurityConfigure {
     private final JwtAccessDeniedHandler accessDeniedHandler;
 
     private final EntryPointUnauthorizedHandler unauthorizedHandler;
+
+    private static final String[] WHITE_LIST = {
+        "/swagger-resources",
+        "/api/auth",
+        "/api/member/join",
+        "/api/member/exists"
+    };
 
     public SecurityConfigure(Jwt jwt, JwtTokenConfigure jwtTokenConfigure, JwtAccessDeniedHandler accessDeniedHandler, EntryPointUnauthorizedHandler unauthorizedHandler) {
         this.jwt = jwt;
@@ -55,30 +63,19 @@ public class SecurityConfigure {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf()
-            .disable()
-            .headers()
-            .disable()
-            .exceptionHandling()
+        http.csrf().disable();
+        http.headers().disable();
+        http.exceptionHandling()
             .accessDeniedHandler(accessDeniedHandler)
-            .authenticationEntryPoint(unauthorizedHandler)
-            .and()
-            .sessionManagement()
-            // JWT 인증을 사용하므로 무상태(STATELESS) 전략 설정
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .authorizeRequests()
-            .requestMatchers("/api/auth").permitAll()
-            .requestMatchers("/api/member/join").permitAll()
-            .requestMatchers("/api/member/exists").permitAll()
+            .authenticationEntryPoint(unauthorizedHandler);
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.authorizeHttpRequests(authorize -> authorize
+            .requestMatchers(WHITE_LIST).permitAll()
             .requestMatchers("/api/**").hasRole(ROLE.USER.name())
             .anyRequest().permitAll()
-            .and()
-            .formLogin()
-            .disable();
-        http
-            .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        );
+        http.formLogin().disable();
+        http.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
