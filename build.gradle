@@ -19,23 +19,39 @@ repositories {
 }
 
 dependencies {
+	// Spring Boot Web and Data JPA
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// OpenAPI documentation UI for Spring Boot
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+
+	// Commons Lang and Google Guava
 	implementation 'org.apache.commons:commons-lang3:3.12.0'
 	implementation 'com.google.guava:guava:30.1.1-jre'
+
+	// JWT and Jackson for JSON processing
 	implementation 'com.auth0:java-jwt:4.3.0'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.7.1'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.3'
+
+	// Spring Security
 	implementation 'org.springframework.security:spring-security-test'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// Spring Validation and Jasypt for encryption
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
+
+	// Lombok and MySQL connector
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+	// Spring Boot Test with JUnit 5
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {
