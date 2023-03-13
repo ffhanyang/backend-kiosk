@@ -45,7 +45,7 @@ class AuthenticationRestControllerTest {
 
         // when & then
         mockMvc.perform(
-                post("/api/auth/")
+                post("/api/auth")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(authenticationRequest))
             )
@@ -64,7 +64,7 @@ class AuthenticationRestControllerTest {
 
         // when & then
         mockMvc.perform(
-                post("/api/auth/")
+                post("/api/auth")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(authenticationRequest))
             )
@@ -83,7 +83,7 @@ class AuthenticationRestControllerTest {
 
         // when & then
         mockMvc.perform(
-                post("/api/auth/")
+                post("/api/auth")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(authenticationRequest))
             )
