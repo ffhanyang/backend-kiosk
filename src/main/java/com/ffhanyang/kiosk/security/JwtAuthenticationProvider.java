@@ -43,7 +43,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
             Member member = memberService.login(new Email(request.getPrincipal()), request.getCredentials());
             JwtAuthenticationToken authenticated =
                 new JwtAuthenticationToken(
-                    new JwtAuthentication(member.getId(), member.getEmail()),
+                    new JwtAuthentication(member.getId().toString(), member.getEmail()),
                     null,
                     createAuthorityList(member.getRole().value())
                 );

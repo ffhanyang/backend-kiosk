@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.UUID;
+
 import static java.lang.Thread.sleep;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -27,8 +29,11 @@ class JwtTest {
     @Value("${jwt.token.client-secret}")
     private String clientSecret;
 
+    private UUID uuid;
+
     @BeforeAll
     void setUp() {
+        uuid = UUID.fromString("5204b969-83b7-42a8-95ba-32efe2f61df9");
         int expirySeconds = 10;
         jwt = new Jwt(issuer, clientSecret, expirySeconds);
     }
@@ -36,7 +41,7 @@ class JwtTest {
     @Test
     @DisplayName("JWT 토큰을 생성하고 복호화 할 수 있다.")
     void jwtCreateDecodeTest() {
-        Jwt.Claims claims = Jwt.Claims.of(1L, new Email("tester00@gmail.com"), new String[]{"ROLE_USER"});
+        Jwt.Claims claims = Jwt.Claims.of(uuid, new Email("tester00@gmail.com"), new String[]{"ROLE_USER"});
         String encodedJWT = jwt.newToken(claims);
         log.info("encodedJWT: {}", encodedJWT);
 
@@ -51,7 +56,7 @@ class JwtTest {
     @DisplayName("JWT 토큰을 리프레시 할 수 있다.")
     void jwtRefresh() throws Exception {
         if (jwt.getExpirySeconds() > 0) {
-            Jwt.Claims claims = Jwt.Claims.of(1L, new Email("test@gmail.com"), new String[]{"ROLE_USER"});
+            Jwt.Claims claims = Jwt.Claims.of(uuid, new Email("test@gmail.com"), new String[]{"ROLE_USER"});
             String encodedJWT = jwt.newToken(claims);
             log.info("encodedJWT: {}", encodedJWT);
 

@@ -59,7 +59,7 @@ public class JwtAuthenticationTokenFilter extends GenericFilterBean {
                         response.setHeader(headerKey, refreshedToken);
                     }
 
-                    Long memberKey = claims.memberKey;
+                    String memberKey = claims.memberKey;
                     Email email = claims.email;
 
                     List<GrantedAuthority> authorities = obtainAuthorities(claims);

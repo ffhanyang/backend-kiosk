@@ -4,10 +4,12 @@ import com.ffhanyang.kiosk.model.Phone;
 import com.ffhanyang.kiosk.security.Jwt;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -15,13 +17,11 @@ import java.util.Optional;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
-    /**
-     * TODO: Member ID 나중에 UUID로 바꿔야 함(현재는 Long)
-     */
     @Id
-    @GeneratedValue
-    @Column(name = "member_id")
-    private Long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "member_id", nullable = false, columnDefinition = "BINARY(16)")
+    private UUID id;
 
     @Column(name = "member_name", nullable = true, length = 20)
     private String name;
@@ -85,7 +85,7 @@ public class Member {
     }
 
     @Builder
-    public Member(Long id, String name, Email email, int age, String password,
+    public Member(UUID id, String name, Email email, int age, String password,
                   GENDER gender, Phone phoneNumber, ROLE role, int loginCount,
                   LocalDateTime createdAt, LocalDateTime lastLoginAt,
                   Location location, Boolean deleted) {

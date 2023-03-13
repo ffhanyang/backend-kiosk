@@ -11,11 +11,11 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class JwtAuthentication {
 
-    private final Id<Member, Long> id;
+    private final Id<Member, String> id;
 
     public final Email email;
 
-    public JwtAuthentication(Long id, Email email) {
+    public JwtAuthentication(String id, Email email) {
         checkArgument(id != null, "id must be provided.");
         checkArgument(email != null, "email must be provided.");
 

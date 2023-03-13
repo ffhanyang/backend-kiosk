@@ -12,6 +12,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.UUID;
 
 public final class Jwt {
 
@@ -81,7 +82,7 @@ public final class Jwt {
     }
 
     static public class Claims {
-        Long memberKey;
+        String memberKey;
         Email email;
         String[] roles;
         Date iat;
@@ -93,7 +94,7 @@ public final class Jwt {
         Claims(DecodedJWT decodedJWT) {
             Claim memberKey = decodedJWT.getClaim("memberKey");
             if (!memberKey.isNull())
-                this.memberKey = memberKey.asLong();
+                this.memberKey = memberKey.asString();
             Claim email = decodedJWT.getClaim("email");
             if (!email.isNull())
                 this.email = new Email(email.asString());
@@ -104,9 +105,9 @@ public final class Jwt {
             this.exp = decodedJWT.getExpiresAt();
         }
 
-        public static Claims of(long memberKey, Email email, String[] roles) {
+        public static Claims of(UUID memberKey, Email email, String[] roles) {
             Claims claims = new Claims();
-            claims.memberKey = memberKey;
+            claims.memberKey = memberKey.toString();
             claims.email = email;
             claims.roles = roles;
             return claims;
